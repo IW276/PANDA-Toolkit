@@ -23,7 +23,8 @@ class ImgSplit():
                  subwidth=2048,
                  subheight=1024,
                  thresh=0.7,
-                 outext='.jpg'
+                 outext='.jpg',
+                 image_subdir='image_train'
                  ):
         """
         :param basepath: base directory for panda image data and annotations
@@ -50,9 +51,9 @@ class ImgSplit():
         self.slidewidth = self.subwidth - self.gap
         self.slideheight = self.subheight - self.gap
         self.thresh = thresh
-        self.imagepath = os.path.join(self.basepath, 'image_train')
+        self.imagepath = os.path.join(self.basepath, image_subdir)
         self.annopath = os.path.join(self.basepath, 'image_annos', annofile)
-        self.outimagepath = os.path.join(self.outpath, 'image_train')
+        self.outimagepath = os.path.join(self.outpath, image_subdir)
         self.outannopath = os.path.join(self.outpath, 'image_annos')
         self.outext = outext
         if not os.path.exists(self.outimagepath):
@@ -242,22 +243,16 @@ class ImgSplit():
                 pose = object_dict['pose']
                 riding = object_dict['riding type']
                 age = object_dict['age']
-                fullrect = object_dict['rects']['full body']
                 visiblerect = object_dict['rects']['visible body']
-                headrect = object_dict['rects']['head']
                 # only keep a person whose 3 box all satisfy the requirement
-                if self.judgeRect(fullrect, imgwidth, imgheight, coordinates) & \
-                   self.judgeRect(visiblerect, imgwidth, imgheight, coordinates) & \
-                   self.judgeRect(headrect, imgwidth, imgheight, coordinates):
+                if self.judgeRect(visiblerect, imgwidth, imgheight, coordinates):
                     newobjlist.append({
                         "category": objcate,
                         "pose": pose,
                         "riding type": riding,
                         "age": age,
                         "rects": {
-                            "head": self.restrainRect(headrect, imgwidth, imgheight, coordinates),
                             "visible body": self.restrainRect(visiblerect, imgwidth, imgheight, coordinates),
-                            "full body": self.restrainRect(fullrect, imgwidth, imgheight, coordinates)
                         }
                     })
             else:

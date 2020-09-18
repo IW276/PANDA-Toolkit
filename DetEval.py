@@ -6,7 +6,7 @@
 
 import numpy as np
 import argparse
-from panda_utils import generate_coco_anno
+from panda_utils import generate_coco_anno_only_person_2
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
 
@@ -31,7 +31,6 @@ Layout for test data
 """, formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument('personfile', type=str, help='File path to person annotation json file')
-    parser.add_argument('vehiclefile', type=str, help='File path to vehicle annotation json file')
     parser.add_argument('result', type=str, help='File path to result json file.')
     parser.add_argument('--transfered', type=str, help='Directory containing transfered gt files', default='transfered.json')
     parser.add_argument('--annType', type=str, help='annotation type', default='bbox')
@@ -46,7 +45,7 @@ def main():
     args = parse_args()
 
     # transfer ground truth to COCO format
-    generate_coco_anno(args.personfile, args.vehiclefile, args.transfered)
+    generate_coco_anno_only_person_2(args.personfile, args.transfered)
 
     # initialize COCO ground truth api
     cocoGt = COCO(args.transfered)
