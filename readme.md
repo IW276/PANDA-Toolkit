@@ -40,11 +40,11 @@ GigaVision Challenge (<a href="https://www.biendata.com/competition/gigavision/"
 ### Usage Autonome Systeme Labor
 1. In order to generate the croppes training dataset, please execute:
 ```
-    python generate_split_data.py --image_root path/to/PANDA/Image --person_anno_file path/to/PANDA/Image/image_annos/person_bbox_train.json --output_dir path/to/PANDA/Image/challenge_crops --image_subdir image_train   
+    python generate_split_data.py --image_root path/to/PANDA/Image --person_anno_file path/to/PANDA/Image/image_annos/person_bbox_train.json --output_dir path/to/PANDA/Image/challenge_crops --image_subdir image_train  --annotype train
 ```
 2. In order to generate the cropped validation dataset, please execute:
 ```
-    python generate_split_data.py --image_root path/to/PANDA/Image --person_anno_file path/to/PANDA/Image/image_annos/person_bbox_valid.json --output_dir path/to/PANDA/Image/challenge_crops --image_subdir image_valid  
+    python generate_split_data.py --image_root path/to/PANDA/Image --person_anno_file path/to/PANDA/Image/image_annos/person_bbox_valid.json --output_dir path/to/PANDA/Image/challenge_crops --image_subdir image_valid  --annotype valid
 ```
 3. Evaluating the result, you can refer to "DetEval.py"
 4. Merging the results detected on the patches, you can refer to "ResultMerge.py"
