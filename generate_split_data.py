@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
 if args.annotype == 'train':
     split = ImgSplit(args.image_root, args.person_anno_file, args.annomode, args.output_dir,
-                     args.outannofile, image_subdir=args.image_subdir)
+                     args.outannofile, subwidth=args.subwidth, subheight=args.subheight, image_subdir=args.image_subdir)
     split.splitdata(args.scale)
     generate_coco_anno_only_person_2(os.path.join(args.output_dir, 'image_annos', args.outannofile),
                                      os.path.join(args.output_dir, 'image_annos', 'train_coco.json'))
@@ -42,7 +42,7 @@ elif args.annotype == 'valid':
     if args.image_subdir == 'image_train':
         args.image_subdir = 'image_valid'
     split = ImgSplit(args.image_root, args.person_anno_file, args.annomode, args.output_dir,
-                     args.outannofile, image_subdir=args.image_subdir)
+                     args.outannofile, subwidth=args.subwidth, subheight=args.subheight, image_subdir=args.image_subdir)
     split.splitdata(args.scale)
     generate_coco_anno_only_person_2(os.path.join(args.output_dir, 'image_annos', args.outannofile),
                                      os.path.join(args.output_dir, 'image_annos', 'valid_coco.json'))
